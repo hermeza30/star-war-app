@@ -1,0 +1,21 @@
+<div class="col">
+  <div class="bg-white shadow-md p-4 rounded-lg">
+    <img *ngIf="img" [src]="img" class="w-72 h-80 rounded-lg" [alt]="alt" />
+    <div class="mt-4 flex flex-row justify-start">
+      <p class="text-xl font-semibold text-star-wars-white">
+        {{ title }}
+      </p>
+
+      <button
+        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+      >
+        <fa-icon [icon]="btnClipboard" style="color: gray">Favoritos</fa-icon>
+      </button>
+      <button
+        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+      >
+        <fa-icon [icon]="btnView" style="color: gray">Ver</fa-icon>
+      </button>
+    </div>
+  </div>
+</div>

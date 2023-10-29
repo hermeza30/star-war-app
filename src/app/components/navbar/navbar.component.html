@@ -1,0 +1,41 @@
+<nav
+  style="
+    display: flex;
+    flex-direction: row;
+    border: 3px darkgoldenrod dashed;
+    align-items: center;
+  "
+>
+  <div>
+    <img src="assets/img/starwarlogo.png" alt="Star Wars Logo" class="h-16" />
+  </div>
+  <div
+    style="
+      display: flex;
+      flex-direction: row;
+      margin-left: 14px;
+      padding-right: 14px;
+    "
+  >
+    <a
+      style="color: darkgoldenrod; padding-left: 10px"
+      [routerLink]="PATH.films"
+      >Peliculas</a
+    >
+    <a
+      style="color: darkgoldenrod; padding-left: 10px"
+      [routerLink]="PATH.peoples"
+      >Personajes</a
+    >
+    <a
+      style="color: darkgoldenrod; padding-left: 10px"
+      [routerLink]="PATH.planets"
+      >Planetas</a
+    >
+    <a
+      style="color: darkgoldenrod; padding-left: 10px"
+      [routerLink]="PATH.vehicles"
+      >Vehiculos</a
+    >
+  </div>
+</nav>

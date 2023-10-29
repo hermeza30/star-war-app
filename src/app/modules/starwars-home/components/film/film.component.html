@@ -1,0 +1,7 @@
+<section class="flex flex-row flex-wrap">
+  <ng-container *ngFor="let film of films$ | async">
+    <app-card [img]="film.image" [title]="film.title">
+      <p>Procucer: {{ film.producer }}</p>
+    </app-card>
+  </ng-container>
+</section>

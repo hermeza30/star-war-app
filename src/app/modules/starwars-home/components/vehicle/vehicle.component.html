@@ -1,0 +1,5 @@
+<section class="flex flex-row flex-wrap">
+  <ng-container *ngFor="let vehicle of vehicle$ | async">
+    <app-card [img]="vehicle.image" [title]="vehicle.name"> </app-card>
+  </ng-container>
+</section>

@@ -1,0 +1,5 @@
+<section class="flex flex-row flex-wrap">
+  <ng-container *ngFor="let planet of planets$ | async">
+    <app-card [img]="planet.image" [title]="planet.name"> </app-card>
+  </ng-container>
+</section>
