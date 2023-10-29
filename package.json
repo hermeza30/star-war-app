@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:prod": "ng test --browsers=ChromeHeadless --watch=false --code-coverage",
-    "build:prod": "ng build --deploy-url /star-war-app/"
+    "build:prod": "ng build --base-href=/star-war-app/"
   },
   "private": true,
   "dependencies": {
