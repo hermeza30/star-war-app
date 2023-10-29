@@ -1,10 +1,11 @@
 import { Component, Inject, inject } from '@angular/core';
-import { StarWarsServiceService } from '../../../service/star-wars-service.service';
+import { StarWarsServiceService } from 'src/app/modules/service/star-wars-service.service';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
+import { finalize, takeUntil } from 'rxjs/operators';
 import { Film, WrapperArray } from 'src/app/interfaces';
 import { CommonModule } from '@angular/common';
 import { CardComponent } from 'src/app/components/card/card.component';
+import { SpinnerService } from 'src/app/modules/service/spinner.service';
 
 @Component({
   selector: 'app-film',
@@ -18,12 +19,20 @@ export class FilmComponent {
   private starWarsServiceService: StarWarsServiceService = inject(
     StarWarsServiceService
   );
-  public films$: Observable<Film[]> = this.starWarsServiceService
-    .getFilmById<WrapperArray<Film>>()
-    .pipe(
-      this.starWarsServiceService.mapOperator<Film>('films'),
-      takeUntil(this.destroy$)
-    );
+  private spinnerService: SpinnerService = inject(SpinnerService);
+  public films$: Observable<Film[]> = new Observable();
+  constructor() {
+    this.spinnerService.showSpinner();
+    this.films$ = this.starWarsServiceService
+      .getFilmById<WrapperArray<Film>>()
+      .pipe(
+        this.starWarsServiceService.mapOperator<Film>('films'),
+        finalize(() => {
+          this.spinnerService.hideSpinner();
+        }),
+        takeUntil(this.destroy$)
+      );
+  }
 
   ngOnDestroy(): void {
     this.destroy$.next();

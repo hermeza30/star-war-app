@@ -1,9 +1,10 @@
 import { Component, OnDestroy, inject } from '@angular/core';
 import { People, WrapperArray } from 'src/app/interfaces';
-import { Observable, Subject, takeUntil, tap } from 'rxjs';
+import { Observable, Subject, finalize, takeUntil, tap } from 'rxjs';
 import { StarWarsServiceService } from 'src/app/modules/service/star-wars-service.service';
 import { CommonModule } from '@angular/common';
 import { CardComponent } from 'src/app/components/card/card.component';
+import { SpinnerService } from 'src/app/modules/service/spinner.service';
 
 @Component({
   selector: 'app-people',
@@ -17,13 +18,23 @@ export class PeopleComponent implements OnDestroy {
   private starWarsServiceService: StarWarsServiceService = inject(
     StarWarsServiceService
   );
-  public peoples$: Observable<People[]> = this.starWarsServiceService
-    .getPeopleById<WrapperArray<People>>()
-    .pipe(
-      this.starWarsServiceService.mapOperator<People>('people'),
-      takeUntil(this.destroy$)
-    );
-
+  private spinnerService: SpinnerService = inject(SpinnerService);
+  public peoples$: Observable<People[]> = new Observable();
+  constructor() {
+    this.getPeoples();
+  }
+  private getPeoples(): void {
+    this.spinnerService.showSpinner();
+    this.peoples$ = this.starWarsServiceService
+      .getPeopleById<WrapperArray<People>>()
+      .pipe(
+        this.starWarsServiceService.mapOperator<People>('people'),
+        finalize(() => {
+          this.spinnerService.hideSpinner();
+        }),
+        takeUntil(this.destroy$)
+      );
+  }
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.unsubscribe();

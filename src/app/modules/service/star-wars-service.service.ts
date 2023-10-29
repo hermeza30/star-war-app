@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { inject } from '@angular/core';
 import { Observable, OperatorFunction, map } from 'rxjs';
 import { WrapperArray } from 'src/app/interfaces/people.interface';
 import { API_URLS, PATH_IMAGES } from 'src/app/constants';

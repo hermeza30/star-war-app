@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { INITIAL_STATE } from '../../constants';
-import { InitialState } from '../../interfaces/store.interface';
+import { INITIAL_STATE } from 'src/app/constants';
+import { InitialState } from 'src/app/interfaces/store.interface';
 import { Film, People, Planet, Vehicle } from 'src/app/interfaces';
 import { Observable } from 'rxjs';
 @Injectable()

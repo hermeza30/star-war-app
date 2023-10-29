@@ -1,4 +1,4 @@
-import { InitialState } from '../interfaces';
+import { InitialState } from 'src/app/interfaces';
 
 export const INITIAL_STATE: InitialState = {
   films: [],

@@ -8,6 +8,7 @@ const routes: Routes = [
     path: '',
     component: StarwarsHomeComponent,
     children: [
+      { path: '', redirectTo: ROUTER_UTIL.films, pathMatch: 'full' },
       {
         path: ROUTER_UTIL.films,
         loadComponent: async () =>
